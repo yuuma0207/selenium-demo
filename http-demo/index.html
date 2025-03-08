@@ -8,14 +8,19 @@
     <h1>大規模データ計算デモ</h1>
     <button id="calcBtn">計算実行</button>
     <div id="result"></div>
+    <h2>送信データ</h2>
+    <div id="sendData"></div>
+    
 
     <script>
       const button = document.getElementById('calcBtn');
       const resultDiv = document.getElementById('result');
+      const sendDataDiv = document.getElementById('sendData');
 
       button.addEventListener('click', async () => {
         // 大きめのデータを例として送る
-        const numbers = Array.from({length: 100000}, () => Math.random());
+        const numbers = Array.from({length: 10}, () => Math.random());
+        sendDataDiv.innerHTML = numbers.map((n, i) => `${i}: ${n}`).join('<br>');
         try {
           const response = await fetch('http://127.0.0.1:5123/calculate', {
             method: 'POST',
