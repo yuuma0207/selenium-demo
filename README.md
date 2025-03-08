@@ -3,7 +3,7 @@
 以下に各ファイルの説明と使い方を記載します。
 
 ## ファイル構成
-
+- `http-demo/` ディレクトリ - Webの仕組みを理解するために JavaScript と Flask を利用した最小限のデモアプリケーション。
 - `pyproject.toml` - Python プロジェクトの設定ファイル。この内容に基づいて `uv sync` コマンドで環境構築する。
 - `flask-demo.py` - Flask を使用したデモアプリケーション。
 - `send_calculate.sh` - 計算リクエストを送信するシェルスクリプト。
