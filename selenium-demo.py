@@ -1,4 +1,5 @@
 import time
+import os
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+os.environ["WDM_LOCAL"] = "1" # プロジェクト内にWebDriverをダウンロードする設定
 
 # 1. ChromeDriver を使ってブラウザを立ち上げる
 service = Service(ChromeDriverManager().install())
@@ -54,6 +57,7 @@ try:
         article_title = first_result.text
         article_url = first_result.find_element(By.XPATH, "./ancestor::a").get_attribute("href")
 
+        print("検索結果を取得しました！")
         print(f"タイトル: {article_title}")
         print(f"URL: {article_url}")
         time.sleep(3)
@@ -70,6 +74,7 @@ try:
         print("検索結果を取得できませんでした")
 
     # 6. スクリーンショットを保存（確認用）
+    print("スクリーンショット保存中...")
     time.sleep(3)
     driver.save_screenshot("search_result.png")
 

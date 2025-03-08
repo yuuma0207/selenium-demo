@@ -47,4 +47,5 @@ def hello():
     return "Hello, World!"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5123, debug=True)
+    # app.run(host='0.0.0.0', port=5123) # 外部からアクセス可能になる
+    app.run(port=5123, debug=True) # ローカルのみのアクセス

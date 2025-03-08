@@ -54,6 +54,9 @@ def google_search(driver, query):
         title = first_result.text
         url = first_result.find_element(By.XPATH, "./ancestor::a").get_attribute("href")
         print(f"タイトル: {title}\nURL: {url}")
+        print("検索結果を取得しました！続けるにはEnterを押してください...")
+        input()
+        print("続行します...")
         return title, url
     except:
         print("検索結果を取得できませんでした")
@@ -61,20 +64,16 @@ def google_search(driver, query):
 
 def take_screenshot(driver):
     """ 現在のページのスクリーンショットを取得し、Base64エンコードして返す """
+    print("スクリーンショットを取得中...")
     time.sleep(3)
     screenshot = driver.get_screenshot_as_png()
     return base64.b64encode(screenshot).decode("utf-8")
 
-@app.route("/calculate", methods=["POST"])
-def calculate():
-    """ 数値配列の合計と平均を計算するAPI """
-    data = request.json
-    arr = np.array(data.get('numbers', []))
-    return jsonify({'total': float(np.sum(arr)), 'average': float(np.mean(arr))})
 
 @app.route("/selenium", methods=["GET"])
 def run_selenium():
     """ Seleniumを使ってGoogle検索し、結果を取得してHTMLとして表示 """
+    print("User-Agent:", request.headers.get("User-Agent"))
     driver = setup_driver()
     try:
         query = "Selenium Python"
@@ -102,7 +101,22 @@ def run_selenium():
     </body>
     </html>
     """
+    print("HTMLを表示します...")
     return render_template_string(html_template, title=title, url=url, screenshot=screenshot)
 
+
+@app.route("/", methods=["GET"])
+def index():
+    """アプリの説明を表示"""
+    return """
+    <h1>Flask×Selenium デモアプリ</h1>
+    <p>このアプリには以下のエンドポイントがあります。</p>
+    <ul>
+        <li><b>GET /</b> - この説明ページ</li>
+        <li><b>GET /selenium</b> - selenium-demo.pyと同じ動作をする</li>
+    </ul>
+    <p>GET /selenium でSeleniumを使ったGoogle検索を実行し、検索結果のスクリーンショットを表示します。</p>
+    """
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5123)
+    app.run(port=5123, debug=True)
