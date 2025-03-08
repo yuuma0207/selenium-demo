@@ -1,14 +1,14 @@
-# 教育用途デモプロジェクト
+# flaskとseleniumのサンプルプロジェクト
 
-このプロジェクトは教育用途として作成されました。以下に各ファイルの説明と使い方を記載します。
+以下に各ファイルの説明と使い方を記載します。
 
 ## ファイル構成
 
+- `pyproject.toml` - Python プロジェクトの設定ファイル。この内容に基づいて `uv sync` コマンドで環境構築する。
 - `flask-demo.py` - Flask を使用したデモアプリケーション。
-- `edu.py` - 教育用の Python スクリプト。
-- `pyproject.toml` - Python プロジェクトの設定ファイル。
-- `selenium-demo.py` - Selenium を使用したブラウザ自動化のデモスクリプト。
 - `send_calculate.sh` - 計算リクエストを送信するシェルスクリプト。
+- `selenium-demo.py` - Selenium を使用したブラウザ自動化のデモスクリプト。
+- `flask=selenium.py` - Flask と Selenium を組み合わせたスクリプト。
 
 ## 環境構築
 
@@ -66,9 +66,9 @@ Selenium を利用したWebスクレイピングのデモンストレーショ�
 python selenium-demo.py
 ```
 
-## `edu.py`について
+## `flask-selenium.py`について
 
-`edu.py` は、SeleniumのスクリプトをAPIとして提供するためのスクリプトになっています。
+`flask-selenium.py` は、SeleniumのスクリプトをAPIとして提供するためのスクリプトになっています。
 Webスクレイピング機能をAPIとして提供することで、HTTPリクエストをトリガーにしてスクリプトを実行できます。
 ただし、外部にこのAPIを公開した場合は、誰もがそのスクレイピング機能にアクセス可能となってしまいます。
 実際の運用においては、パスワードを用いた認証機能や、IPアドレスのアクセス制限をかけることが必要です。
